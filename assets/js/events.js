@@ -39,7 +39,7 @@ window.SKLAR_EVENTS = [
     title: "Chain React 2026",
     event: "Infinite Red",
     location: "Portland, OR",
-    role: "Speaker",
+    role: "",
     url: "https://chainreactconf.com/",
     blurb: "The U.S. React Native conference."
   },
@@ -49,7 +49,7 @@ window.SKLAR_EVENTS = [
     title: "CityJS Athens 2026",
     event: "CityJS",
     location: "Athens, Greece",
-    role: "Speaker",
+    role: "",
     url: "https://athens.cityjsconf.org/",
     blurb: "The JavaScript community conference, Athens edition."
   },
@@ -59,7 +59,7 @@ window.SKLAR_EVENTS = [
     title: "AWS re:Invent 2026",
     event: "Amazon Web Services",
     location: "Las Vegas, NV",
-    role: "Speaker",
+    role: "",
     url: "https://aws.amazon.com/events/reinvent",
     blurb: "AWS's flagship annual cloud conference."
   },
@@ -69,7 +69,7 @@ window.SKLAR_EVENTS = [
     title: "AgentConf Warsaw",
     event: "AgentConf",
     location: "Warsaw, Poland",
-    role: "Speaker",
+    role: "",
     url: "https://agent.sh",
     blurb: "The conference for developers building AI agents."
   },
@@ -89,7 +89,7 @@ window.SKLAR_EVENTS = [
     title: "Nextapp DevCon",
     event: "Nextapp",
     location: "Berlin, Germany",
-    role: "Speaker",
+    role: "",
     url: "https://www.nextappcon.com/",
     blurb: "App development conference in Berlin."
   },
@@ -104,7 +104,7 @@ window.SKLAR_EVENTS = [
     title: "CES 2026",
     event: "Consumer Technology Association",
     location: "Las Vegas, NV",
-    role: "Keynote & Booth",
+    role: "Executive Tour Lead",
     url: "https://www.ces.tech/",
     blurb: "Debuted the Alexa+ AI Innovator Series and represented Alexa+ on the floor."
   },
@@ -114,7 +114,7 @@ window.SKLAR_EVENTS = [
     title: "MWC Barcelona 2026",
     event: "GSMA",
     location: "Barcelona, Spain",
-    role: "Speaker & Booth",
+    role: "Alexa+ Onsite Lead",
     url: "https://www.mwcbarcelona.com/",
     blurb: "Carried the Alexa+ story to the world's largest mobile industry gathering."
   },
@@ -123,7 +123,7 @@ window.SKLAR_EVENTS = [
     title: "AWS Summit Paris",
     event: "Amazon Web Services",
     location: "Paris, France",
-    role: "Speaker",
+    role: "Alexa+ Onsite Lead",
     url: "https://aws.amazon.com/events/summits/",
     blurb: "Alexa+ on stage for the French developer and partner community."
   },
@@ -152,7 +152,7 @@ window.SKLAR_EVENTS = [
     title: "Project Voice 2026",
     event: "Project Voice",
     location: "USA",
-    role: "Speaker",
+    role: "Keynote Speaker",
     url: "https://www.projectvoice.ai/",
     blurb: "The longest-running of the original voice-technology conferences."
   },
@@ -162,7 +162,7 @@ window.SKLAR_EVENTS = [
     title: "AWS Summit Sydney",
     event: "Amazon Web Services",
     location: "Sydney, Australia",
-    role: "Speaker",
+    role: "Alexa+ Onsite Lead",
     url: "https://aws.amazon.com/events/summits/",
     blurb: "Represented Alexa+ across the APAC developer and partner community."
   },
@@ -172,7 +172,7 @@ window.SKLAR_EVENTS = [
     title: "VivaTech 2026",
     event: "Viva Technology",
     location: "Paris, France",
-    role: "Exhibit Lead",
+    role: "Alexa+ Onsite Lead",
     url: "https://vivatech.com/",
     blurb: "Led the first public debut of French Alexa+ to the developer and partner community."
   }

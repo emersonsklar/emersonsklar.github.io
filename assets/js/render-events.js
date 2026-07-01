@@ -99,7 +99,7 @@
     var inner = '' +
       '<span class="meta">' + esc(fmtRange(e._start, e._end)) + (e.location ? ' &middot; ' + esc(e.location) : '') + '</span>' +
       '<h3>' + esc(e.title) + '</h3>' +
-      '<p>' + esc([e.role, e.event].filter(Boolean).join(" &middot; ")) + '</p>' +
+      '<p>' + [e.role, e.event].filter(Boolean).map(esc).join(" &middot; ") + '</p>' +
       (e.url ? '<div class="arrow">Details &rarr;</div>' : '');
     return e.url
       ? '<a class="card" href="' + esc(e.url) + '" target="_blank" rel="noopener">' + inner + '</a>'
