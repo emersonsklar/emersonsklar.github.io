@@ -9,19 +9,32 @@ served at the custom domain **[sklar.ai](https://sklar.ai)**.
 Hand-written static HTML + CSS. **No build step, no dependencies, no framework.**
 What's in the repo is exactly what ships. Edit an `.html` file, commit, push — it's live in a minute or two.
 
+Pages use **clean URLs** — each lives in its own folder as `index.html`, so it's
+served at `/about/`, `/events/`, etc. (no `.html` in the address).
+
 ```
-├── index.html        Home (shows next 3 upcoming events)
-├── about.html        About / bio
-├── events.html       Events — upcoming + past (auto-sorted by date)
-├── writing.html      Essays & field notes
-├── media.html        Videos & podcasts
-├── contact.html      Contact & booking
+├── index.html          Home (shows next 3 upcoming events)
+├── about/index.html    About / bio         → /about/
+├── events/index.html   Events (auto-sorted) → /events/
+├── content/index.html  Videos & podcasts    → /content/
+├── contact/index.html  Contact & booking    → /contact/
+├── about.html, events.html, …   tiny redirect stubs from old /x.html → /x/
+├── assets/img/og-image.jpg     Social share preview (1200×630)
 ├── assets/css/style.css        All styling (edit the palette here)
 ├── assets/js/events.js         ← YOUR EVENTS: the only file you edit for events
 ├── assets/js/render-events.js  Auto-sorts events into upcoming/past (don't edit)
-├── CNAME             Custom domain (sklar.ai) — do not delete
-└── .nojekyll         Serve files as-is (skip Jekyll processing)
+├── CNAME               Custom domain (sklar.ai) — do not delete
+└── .nojekyll           Serve files as-is (skip Jekyll processing)
 ```
+
+To add a **new page** with a clean URL, create `newpage/index.html` → it serves at `/newpage/`.
+
+## Social preview (OpenGraph)
+
+Every page has OpenGraph + Twitter Card tags so links unfurl with a title,
+description, and the `assets/img/og-image.jpg` thumbnail on Slack, LinkedIn, X,
+iMessage, etc. To change the preview image, replace that file (keep it 1200×630).
+The home page also has JSON-LD Person data to help Google show a rich result.
 
 ## Events (self-updating)
 
