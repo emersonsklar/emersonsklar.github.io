@@ -1,0 +1,430 @@
+/* =========================================================================
+   sklar.ai — Emerson Sklar, Chief Evangelist, Amazon Alexa
+   Hand-written static site. No build step, no dependencies.
+   Edit content in the .html files; edit look-and-feel here.
+   ========================================================================= */
+
+/* ---- Design tokens ---------------------------------------------------- */
+:root {
+  /* Palette — deep midnight background with an electric-cyan accent.
+     A nod to Alexa's glow without literally copying it. Change --accent
+     to re-skin the whole site in one line. */
+  --bg:            #0a0e14;   /* page background */
+  --bg-elev:       #111722;   /* raised cards / panels */
+  --bg-elev-2:     #161d2b;   /* hover / nested panels */
+  --fg:            #f4f6fb;   /* primary text */
+  --muted:         #9aa4b8;   /* secondary text */
+  --border:        #212a3a;   /* hairline borders */
+  --border-strong: #3a465c;
+  --accent:        #38e0d0;   /* electric cyan — primary accent */
+  --accent-dim:    #1fa89b;   /* darker accent for hovers */
+  --accent-glow:   rgba(56, 224, 208, 0.35);
+  --accent-2:      #a06bff;   /* electric violet — secondary accent, used sparingly */
+  --accent-2-dim:  #7b46d8;   /* darker violet for hovers */
+  --accent-2-glow: rgba(160, 107, 255, 0.35);
+
+  /* Typography */
+  --font-display: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-sans:    "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Layout */
+  --maxw: 1080px;
+  --radius: 14px;
+}
+
+/* ---- Reset ------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Ambient glow behind the page — subtle, fixed, decorative. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60rem 40rem at 75% -10%, rgba(56, 224, 208, 0.12), transparent 60%),
+    radial-gradient(48rem 38rem at 105% 55%, rgba(160, 107, 255, 0.10), transparent 55%),
+    radial-gradient(50rem 40rem at -10% 20%, rgba(80, 120, 255, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+/* ---- Typography ------------------------------------------------------- */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; }
+
+h1 { font-size: clamp(2.8rem, 7vw, 5.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.7rem); }
+
+p { color: var(--muted); }
+strong { color: var(--fg); font-weight: 600; }
+em { font-style: italic; }
+
+.accent { color: var(--accent); }
+
+/* Gradient text treatment — cyan → violet. Used sparingly for emphasis
+   (e.g. a word in the hero headline). Falls back to solid accent where
+   background-clip:text is unsupported. */
+.grad-text {
+  color: var(--accent);
+  background: linear-gradient(100deg, var(--accent) 0%, var(--accent-2) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Small monospace label used for section markers like "§ 01 / SPEAKING" */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* ---- Layout helpers --------------------------------------------------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem; }
+
+section { padding: 5.5rem 0; }
+section + section { border-top: 1px solid var(--border); }
+
+.lead { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--muted); max-width: 46ch; }
+
+/* ---- Navigation ------------------------------------------------------- */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(12px);
+  background: rgba(10, 14, 20, 0.72);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--maxw); margin: 0 auto; padding: 1.1rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.brand { display: flex; align-items: baseline; gap: 0.25rem; }
+.brand .name { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: -0.01em; }
+.brand sup { font-size: 0.6rem; color: var(--muted); }
+
+.nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+.nav-links a {
+  font-size: 0.9rem; color: var(--muted); position: relative;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: var(--fg); }
+.nav-links a.active { color: var(--fg); }
+.nav-links a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px;
+  height: 1.5px; background: var(--accent);
+}
+
+/* "Available for talks" pill */
+.pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border: 1px solid var(--border-strong); border-radius: 999px;
+  padding: 0.45rem 0.95rem; font-size: 0.8rem; color: var(--fg);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.pill:hover { border-color: var(--accent); background: var(--bg-elev); }
+.dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 10px 1px var(--accent-glow);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* Mobile menu toggle (checkbox hack — no JS needed) */
+.nav-toggle, .nav-toggle-label { display: none; }
+
+/* ---- Buttons ---------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-family: var(--font-sans); font-size: 0.95rem; font-weight: 500;
+  padding: 0.8rem 1.5rem; border-radius: 999px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn-primary { background: linear-gradient(100deg, var(--accent) 0%, #5ce9dc 55%, var(--accent-2) 220%); color: #04201d; font-weight: 600; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--accent-glow), 0 4px 22px var(--accent-2-glow); }
+.btn-ghost { border: 1px solid var(--border-strong); color: var(--fg); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---- Hero ------------------------------------------------------------- */
+.hero { padding: 6rem 0 5rem; position: relative; overflow: hidden; }
+
+/* Two-column layout on desktop: copy on the left, portrait on the right.
+   Stacks to a single column on narrow viewports (see responsive block). */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.hero .role {
+  font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem;
+}
+.hero .role .accent { color: var(--accent); }
+.hero h1 { margin-bottom: 1.5rem; }
+.hero .lead { margin-bottom: 2.25rem; max-width: 40ch; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* Portrait with a soft dual-accent glow. Rounded-rectangle frame keeps the
+   full square headshot visible — no circular crop that clips the face. */
+.hero-portrait { position: relative; justify-self: center; max-width: 360px; width: 100%; }
+.hero-portrait::before {
+  content: "";
+  position: absolute; inset: -12%;
+  z-index: 0;
+  border-radius: 30%;
+  background:
+    radial-gradient(circle at 30% 25%, var(--accent-glow), transparent 62%),
+    radial-gradient(circle at 75% 80%, var(--accent-2-glow), transparent 60%);
+  filter: blur(28px);
+  opacity: 0.9;
+}
+.hero-portrait img {
+  position: relative; z-index: 1;
+  width: 100%; height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Floating gradient orbs behind the hero — decorative, subtle drift. */
+.hero-orb {
+  position: absolute; z-index: 0; border-radius: 50%;
+  filter: blur(60px); pointer-events: none; opacity: 0.5;
+}
+.hero-orb.orb-1 {
+  width: 30rem; height: 30rem; top: -8rem; right: -6rem;
+  background: radial-gradient(circle, var(--accent-glow), transparent 68%);
+  animation: orbFloat 18s ease-in-out infinite;
+}
+.hero-orb.orb-2 {
+  width: 24rem; height: 24rem; bottom: -10rem; left: -8rem;
+  background: radial-gradient(circle, var(--accent-2-glow), transparent 68%);
+  animation: orbFloat 22s ease-in-out infinite reverse;
+}
+.hero .wrap { position: relative; z-index: 1; }
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(2.5rem, 1.5rem) scale(1.08); }
+}
+
+/* ---- Stats strip ------------------------------------------------------ */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.stat { border-left: 2px solid var(--border-strong); padding-left: 1.25rem; }
+.stat .num { font-family: var(--font-display); font-size: 2.4rem; color: var(--fg); line-height: 1; }
+.stat .label { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; }
+
+/* ---- Alexa+ brand band ------------------------------------------------ */
+/* A focused band that reinforces the Alexa connection, framing the looping
+   animated Alexa+ wordmark. */
+.alexa-band .wrap {
+  display: grid; grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem); align-items: center;
+}
+.alexa-band .band-copy .eyebrow { color: var(--accent-2); }
+.alexa-band .band-copy h2 { margin-bottom: 0.9rem; }
+.alexa-band .band-copy p { max-width: 44ch; }
+.alexa-logo-frame {
+  position: relative; justify-self: end;
+  width: 100%; max-width: 560px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--bg-elev);
+  box-shadow: 0 0 0 1px rgba(160, 107, 255, 0.10), 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+/* Gradient glow rim on the frame using a masked border. */
+.alexa-logo-frame::after {
+  content: ""; position: absolute; inset: 0; z-index: 2;
+  border-radius: inherit; padding: 1px;
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0.55; pointer-events: none;
+}
+.alexa-logo-frame video,
+.alexa-logo-frame img.alexa-logo-media {
+  display: block; width: 100%; height: auto;
+}
+
+/* ---- Cards / lists ---------------------------------------------------- */
+.card {
+  position: relative;
+  background: var(--bg-elev); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.75rem;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover { border-color: var(--border-strong); transform: translateY(-3px); background: var(--bg-elev-2); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+
+.card .meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.05em; }
+.card h3 { margin: 0.6rem 0; color: var(--fg); }
+.card p { font-size: 0.95rem; }
+.card .arrow { margin-top: 1rem; font-size: 0.9rem; color: var(--muted); transition: color 0.2s; }
+.card:hover .arrow { color: var(--accent); }
+
+/* Section header with a "see all" link on the right */
+.section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 2.5rem; gap: 1rem; flex-wrap: wrap; }
+.section-head .more { font-size: 0.9rem; color: var(--muted); }
+.section-head .more:hover { color: var(--accent); }
+
+/* ---- Timeline (Speaking / experience) --------------------------------- */
+.timeline { list-style: none; }
+.timeline li {
+  display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.5rem;
+  padding: 1.4rem 0; border-top: 1px solid var(--border);
+}
+.timeline li:first-child { border-top: none; }
+.timeline .when { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); padding-top: 0.2rem; }
+.timeline .what h3 { font-size: 1.2rem; color: var(--fg); margin-bottom: 0.25rem; }
+.timeline .what .venue { color: var(--accent); font-size: 0.9rem; }
+.timeline .what p { font-size: 0.95rem; margin-top: 0.4rem; }
+
+/* ---- Media grid (videos / podcasts) ----------------------------------- */
+.media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+.media-item { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+.media-item:hover { border-color: var(--border-strong); transform: translateY(-3px); }
+.media-thumb { position: relative; aspect-ratio: 16 / 9; background: var(--bg-elev-2); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.media-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease, filter 0.3s ease; filter: brightness(0.82); }
+.media-item:hover .media-thumb img { transform: scale(1.05); filter: brightness(0.62); }
+.media-thumb .play { position: relative; z-index: 2; width: 54px; height: 54px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; color: #04201d; font-size: 1.2rem; box-shadow: 0 0 24px var(--accent-glow); transition: transform 0.2s ease; }
+.media-item:hover .media-thumb .play { transform: scale(1.1); }
+.media-embed { aspect-ratio: 16 / 9; width: 100%; border: 0; display: block; }
+.media-body { padding: 1.25rem 1.4rem 1.5rem; }
+.media-body .kind { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.media-body h3 { font-size: 1.15rem; color: var(--fg); margin: 0.5rem 0 0.35rem; }
+.media-body p { font-size: 0.9rem; }
+
+/* ---- About intro (portrait + opening copy) ---------------------------- */
+.about-intro {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+.about-portrait { position: relative; }
+.about-portrait::before {
+  content: "";
+  position: absolute; inset: -10%;
+  z-index: 0;
+  border-radius: 30%;
+  background:
+    radial-gradient(circle at 30% 25%, var(--accent-glow), transparent 62%),
+    radial-gradient(circle at 75% 80%, var(--accent-2-glow), transparent 60%);
+  filter: blur(26px);
+  opacity: 0.85;
+}
+.about-portrait img {
+  position: relative; z-index: 1;
+  width: 100%; height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+.about-intro-copy { max-width: none; }
+/* Normalize ALL body paragraphs on the About page to one consistent size/color.
+   Overrides the global ".prose p:first-of-type" lead-paragraph treatment, which
+   otherwise turns the first paragraph of each prose block white — and the About
+   page has two prose blocks, so it looked scattered (paras 1 and 3 white). */
+.about-page .prose p,
+.about-page .prose p:first-of-type { font-size: 1.08rem; color: var(--muted); }
+@media (max-width: 720px) {
+  .about-intro { grid-template-columns: 1fr; justify-items: center; }
+  .about-portrait { max-width: 220px; }
+}
+
+/* ---- Prose (About / Writing article body) ----------------------------- */
+.prose { max-width: 65ch; }
+.prose p { margin-bottom: 1.4rem; font-size: 1.08rem; }
+.prose p:first-of-type { font-size: 1.2rem; color: var(--fg); }
+.prose a { color: var(--accent); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+.prose a:hover { border-color: var(--accent); }
+.prose h2 { margin: 2.5rem 0 1rem; }
+
+/* ---- Contact ---------------------------------------------------------- */
+.contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.contact-links a {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 1.4rem; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--bg-elev); transition: border-color 0.2s, transform 0.2s;
+}
+.contact-links a:hover { border-color: var(--accent); transform: translateX(4px); }
+.contact-links .label { display: flex; align-items: center; gap: 0.9rem; }
+.contact-links .channel { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; width: 6rem; }
+.contact-links .handle { color: var(--fg); }
+.contact-links .go { color: var(--muted); }
+.contact-links a:hover .go { color: var(--accent); }
+
+/* ---- Footer ----------------------------------------------------------- */
+.footer { border-top: 1px solid var(--border); padding: 3rem 0; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.footer .copy { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em; }
+.footer .socials { display: flex; gap: 1.5rem; }
+.footer .socials a { font-size: 0.85rem; color: var(--muted); transition: color 0.2s; }
+.footer .socials a:hover { color: var(--accent); }
+
+/* ---- Entrance animation ----------------------------------------------- */
+@keyframes fadeRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.rise { animation: fadeRise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.25s; }
+.rise-4 { animation-delay: 0.35s; }
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+  .hero-orb { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---- Responsive ------------------------------------------------------- */
+/* Collapse two-column hero + alexa band on tablets and below. */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-portrait { order: -1; max-width: 260px; }
+  .alexa-band .wrap { grid-template-columns: 1fr; gap: 2rem; }
+  .alexa-logo-frame { justify-self: center; }
+}
+
+@media (max-width: 720px) {
+  .nav-toggle-label {
+    display: block; cursor: pointer; font-size: 1.5rem; color: var(--fg);
+    background: none; border: none; line-height: 1;
+  }
+  .nav-links {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: flex-start; gap: 0;
+    background: var(--bg-elev); border-bottom: 1px solid var(--border);
+    padding: 0.5rem 1.5rem 1.25rem;
+  }
+  .nav-links li { width: 100%; }
+  .nav-links li a { display: block; padding: 0.75rem 0; width: 100%; }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .nav .pill { display: none; }
+
+  .stats { grid-template-columns: 1fr; gap: 1.25rem; }
+  .timeline li { grid-template-columns: 1fr; gap: 0.35rem; }
+  .timeline .when { padding-top: 0; }
+  section { padding: 4rem 0; }
+}

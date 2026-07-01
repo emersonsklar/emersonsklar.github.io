@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Video carousel — used only by the "Watch" section on content.html.
+   Turns a long vertical grid of video cards into a horizontally-scrolling
+   2-row x 3-column carousel with prev/next arrows.
+
+   Reuses the existing design tokens (--bg, --accent, --border, etc.) and the
+   existing .media-item / .media-thumb / .media-body card styles from
+   style.css — this file only lays out the track and styles the arrows.
+   ========================================================================== */
+
+/* Wrapper that positions the arrow buttons relative to the scrolling track. */
+.carousel {
+  position: relative;
+}
+
+/* The scrolling track.
+   - Two rows, and columns are auto-created as cards flow down-then-right,
+     so every 3 columns = one "page" of 6 videos on desktop.
+   - Native CSS scroll-snap keeps columns aligned as you scroll or click. */
+.carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, auto);
+  /* 3 columns visible at once. Each column is a third of the track width,
+     minus its share of the two gaps between the three columns. */
+  grid-auto-columns: calc((100% - 2 * 1.5rem) / 3);
+  gap: 1.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* Room for the focus ring / hover lift so cards aren't clipped. */
+  padding: 4px;
+  margin: -4px;
+  /* Hide the native scrollbar — navigation is via the arrows / swipe. */
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* old Edge */
+}
+.carousel-track::-webkit-scrollbar { display: none; } /* Chrome / Safari */
+
+/* Snap each card's column to the left edge of the track. */
+.carousel-track > .media-item {
+  scroll-snap-align: start;
+}
+
+/* Arrow controls — circular, accent-colored, matching the .play / .btn
+   visual language from style.css. */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-elev);
+  color: var(--fg);
+  font-size: 1.2rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease,
+              background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.carousel-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--bg-elev-2);
+  box-shadow: 0 0 24px var(--accent-glow);
+}
+.carousel-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Dimmed + non-interactive at the start (prev) or end (next) of the track. */
+.carousel-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Pull the arrows just outside the track so they don't cover the cards. */
+.carousel-btn.prev { left: -22px; }
+.carousel-btn.next { right: -22px; }
+
+/* --------------------------------------------------------------------------
+   Responsive: as the viewport narrows, show fewer columns per page.
+   Horizontal swipe/scroll still works at every size.
+   -------------------------------------------------------------------------- */
+
+/* Tablet: 2 columns per page. */
+@media (max-width: 900px) {
+  .carousel-track {
+    grid-auto-columns: calc((100% - 1.5rem) / 2);
+  }
+}
+
+/* Mobile: 1 column per page. Tuck arrows inside the edges so they stay
+   reachable, or the user can simply swipe horizontally. */
+@media (max-width: 600px) {
+  .carousel-track {
+    grid-auto-columns: 100%;
+  }
+  .carousel-btn.prev { left: 4px; }
+  .carousel-btn.next { right: 4px; }
+}
+
+/* Respect users who prefer reduced motion: no smooth-scroll animation. */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track { scroll-behavior: auto; }
+}

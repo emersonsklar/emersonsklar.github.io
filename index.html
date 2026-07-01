@@ -1,1 +1,200 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emerson Sklar — Chief Evangelist, Amazon Alexa</title>
+  <meta name="description" content="Emerson Sklar is Chief Evangelist for Amazon Alexa — speaking and building at the intersection of voice, ambient computing, and AI.">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Emerson Sklar — Chief Evangelist, Amazon Alexa">
+  <meta property="og:description" content="Speaking and building at the intersection of voice, ambient computing, and AI.">
+  <meta property="og:url" content="https://sklar.ai">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+</head>
+<body>
+
+  <!-- ============================ NAV ============================ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/">
+        <span class="name">Emerson Sklar</span><sup>®</sup>
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">☰</label>
+      <ul class="nav-links">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/events.html">Events</a></li>
+        <li><a href="/content.html">Content</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a class="pill" href="/contact.html"><span class="dot"></span>Available to speak</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ============================ HERO ============================ -->
+  <header class="hero">
+    <span class="hero-orb orb-1" aria-hidden="true"></span>
+    <span class="hero-orb orb-2" aria-hidden="true"></span>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="role rise rise-1">Chief Evangelist <span class="accent">·</span> Amazon Alexa <span class="accent">·</span> Seattle</p>
+          <h1 class="rise rise-2">Helping the world<br>learn to <em class="grad-text">talk</em><br>to machines.</h1>
+          <p class="lead rise rise-3">I'm Emerson Sklar. I spend my days connecting developers, partners, and audiences to the future of voice, ambient computing, and AI &mdash; on stages, on camera, and in the room where products get built.</p>
+          <div class="hero-actions rise rise-4">
+            <a class="btn btn-primary" href="/contact.html">Book me to speak &rarr;</a>
+            <a class="btn btn-ghost" href="/about.html">More about me</a>
+          </div>
+        </div>
+        <div class="hero-portrait rise rise-3">
+          <img src="/assets/img/headshot.jpg" width="900" height="900"
+               alt="Portrait of Emerson Sklar, Chief Evangelist for Amazon Alexa"
+               fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================ STATS ============================ -->
+  <section>
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat">
+          <div class="num">20+</div>
+          <div class="label">Years evangelizing developer platforms</div>
+        </div>
+        <div class="stat">
+          <div class="num">100+</div>
+          <div class="label">Keynotes, panels &amp; conference talks delivered</div>
+        </div>
+        <div class="stat">
+          <div class="num grad-text">Alexa+</div>
+          <div class="label">Currently championing the next era of&nbsp;ambient&nbsp;AI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ALEXA+ BAND ============================ -->
+  <section class="alexa-band">
+    <div class="wrap">
+      <div class="band-copy">
+        <span class="eyebrow">Championing Alexa+</span>
+        <h2>The next era of ambient&nbsp;AI</h2>
+        <p>Alexa+ reimagines the assistant as a genuinely conversational, capable partner. I help developers and partners build for it &mdash; and tell that story to the world.</p>
+      </div>
+      <div class="alexa-logo-frame">
+        <video autoplay loop muted playsinline
+               aria-label="Animated Alexa+ logo">
+          <source src="/assets/img/alexaLogo.webm" type="video/webm">
+          <source src="/assets/img/alexaLogo.mp4" type="video/mp4">
+          <img class="alexa-logo-media" src="/assets/img/alexaLogo.gif" alt="Alexa+ logo">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ UPCOMING EVENTS ============================ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">§ 01 &nbsp; Upcoming</span>
+          <h2>Where to find me next</h2>
+        </div>
+        <a class="more" href="/events.html">All events &rarr;</a>
+      </div>
+      <!-- Auto-populated with the next few upcoming events from assets/js/events.js -->
+      <div class="card-grid" id="events-home"></div>
+    </div>
+  </section>
+
+  <!-- ============================ FEATURED ============================ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">§ 02 &nbsp; Featured</span>
+          <h2>On the record</h2>
+        </div>
+        <a class="more" href="/content.html">All content &rarr;</a>
+      </div>
+      <div class="media-grid">
+        <article class="media-item">
+          <a href="https://www.youtube.com/watch?v=NsKoi2pzSls" target="_blank" rel="noopener">
+            <div class="media-thumb">
+              <img src="https://img.youtube.com/vi/NsKoi2pzSls/hqdefault.jpg" alt="" loading="lazy">
+              <div class="play">&#9654;</div>
+            </div>
+          </a>
+          <div class="media-body">
+            <span class="kind">AI Innovator Series</span>
+            <h3>Priceline's Penny Travel Assistant</h3>
+            <p>Revolutionizing travel planning with AI.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <a href="https://www.youtube.com/watch?v=eh3qBRM03-0" target="_blank" rel="noopener">
+            <div class="media-thumb">
+              <img src="https://img.youtube.com/vi/eh3qBRM03-0/hqdefault.jpg" alt="" loading="lazy">
+              <div class="play">&#9654;</div>
+            </div>
+          </a>
+          <div class="media-body">
+            <span class="kind">AI Innovator Series</span>
+            <h3>Volley on Voice AI Gaming</h3>
+            <p>Building Alexa skills and LLM-powered games.</p>
+          </div>
+        </article>
+        <article class="media-item">
+          <a href="https://www.youtube.com/watch?v=b-GQsr6sros" target="_blank" rel="noopener">
+            <div class="media-thumb">
+              <img src="https://img.youtube.com/vi/b-GQsr6sros/hqdefault.jpg" alt="" loading="lazy">
+              <div class="play">&#9654;</div>
+            </div>
+          </a>
+          <div class="media-body">
+            <span class="kind">AI Innovator Series · CES 2026</span>
+            <h3>Virgin Atlantic's AI Concierge</h3>
+            <p>Transforming travel with generative AI.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CTA ============================ -->
+  <section>
+    <div class="wrap" style="text-align:center;">
+      <span class="eyebrow">§ 03 &nbsp; Let's talk</span>
+      <h2 style="margin-bottom:1rem;">Planning an event, a story, or a partnership?</h2>
+      <p class="lead" style="margin:0 auto 2rem;">I'm always glad to hear from conference organizers, journalists, and builders working on the edge of voice and AI.</p>
+      <a class="btn btn-primary" href="/contact.html">Get in touch &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="copy">© MMXXVI · SKLAR.AI · Seattle</span>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/emersonsklar/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/emersonsklar" target="_blank" rel="noopener">X</a>
+        <a href="https://github.com/emersonsklar" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:emersonsklar@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/events.js?v=2"></script>
+  <script src="/assets/js/render-events.js?v=2"></script>
+</body>
+</html>

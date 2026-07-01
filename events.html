@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events — Emerson Sklar</title>
+  <meta name="description" content="Upcoming and past events, keynotes, and appearances by Emerson Sklar, Chief Evangelist for Amazon Alexa.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Events — Emerson Sklar">
+  <meta property="og:url" content="https://sklar.ai/events.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css?v=2">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="name">Emerson Sklar</span><sup>®</sup></a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">☰</label>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/events.html" class="active">Events</a></li>
+        <li><a href="/content.html">Content</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li><a class="pill" href="/contact.html"><span class="dot"></span>Available to speak</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+    <div class="wrap">
+      <span class="eyebrow rise rise-1">Events</span>
+      <h1 class="rise rise-2" style="margin-bottom:1.5rem;">Where to find me.</h1>
+      <p class="lead rise rise-3" style="margin-bottom:3rem;">Keynotes, fireside chats, and panels on voice, ambient computing, AI, and developer culture. This list updates itself &mdash; events move from upcoming to past automatically once the date has passed.</p>
+
+      <div class="section-head">
+        <div><span class="eyebrow">§ 01 &nbsp; Upcoming</span><h2>What's next</h2></div>
+      </div>
+      <ul class="timeline" id="events-upcoming" style="margin-bottom:4rem;">
+        <!-- Auto-populated from assets/js/events.js -->
+      </ul>
+
+      <div class="section-head">
+        <div><span class="eyebrow">§ 02 &nbsp; Past</span><h2>Where I've been</h2></div>
+      </div>
+      <ul class="timeline" id="events-past">
+        <!-- Auto-populated from assets/js/events.js -->
+      </ul>
+
+      <div style="margin-top:4rem; text-align:center;">
+        <a class="btn btn-primary" href="/contact.html">Invite me to your event &rarr;</a>
+      </div>
+
+      <p style="margin-top:3rem; font-family:var(--font-mono); font-size:0.78rem; color:var(--muted);">
+        &nbsp;// To add or change an event, edit <strong>assets/js/events.js</strong> only. Upcoming vs. past is handled for you by date.
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span class="copy">© MMXXVI · SKLAR.AI · Seattle</span>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/emersonsklar/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/emersonsklar" target="_blank" rel="noopener">X</a>
+        <a href="https://github.com/emersonsklar" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:emersonsklar@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/events.js?v=2"></script>
+  <script src="/assets/js/render-events.js?v=2"></script>
+</body>
+</html>
