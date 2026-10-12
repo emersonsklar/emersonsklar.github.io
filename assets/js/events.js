@@ -44,16 +44,6 @@ window.SKLAR_EVENTS = [
     blurb: "The U.S. React Native conference."
   },
   {
-    date: "2026-10-21",
-    endDate: "2026-10-23",
-    title: "CityJS Athens 2026",
-    event: "CityJS",
-    location: "Athens, Greece",
-    role: "",
-    url: "https://athens.cityjsconf.org/",
-    blurb: "The JavaScript community conference, Athens edition."
-  },
-  {
     date: "2026-11-30",
     endDate: "2026-12-04",
     title: "AWS re:Invent 2026",
@@ -62,6 +52,15 @@ window.SKLAR_EVENTS = [
     role: "",
     url: "https://aws.amazon.com/events/reinvent",
     blurb: "AWS's flagship annual cloud conference."
+  },
+  {
+    date: "2026-12-18",
+    title: "GenAI Executive Briefing",
+    event: "",
+    location: "Tokyo, Japan",
+    role: "",
+    url: "",
+    blurb: ""
   },
   {
     date: "2026-09-17",
