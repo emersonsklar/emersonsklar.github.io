@@ -14,8 +14,9 @@
 }
 
 /* The scrolling track.
-   - Two rows, and columns are auto-created as cards flow down-then-right,
-     so every 3 columns = one "page" of 6 videos on desktop.
+   - Two rows; every 3 columns = one "page" of 6 videos on desktop.
+     carousel.js places each card so a page reads left-to-right, row by row
+     (column flow below is only the no-JS fallback).
    - Native CSS scroll-snap keeps columns aligned as you scroll or click. */
 .carousel-track {
   display: grid;

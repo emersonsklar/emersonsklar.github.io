@@ -4,7 +4,8 @@
    Drives the prev/next arrows: each click scrolls the track by one "page"
    (the visible width). Also enables/disables the arrows at the two ends.
    Everything is vanilla JS — no libraries. The layout itself is pure CSS
-   (see assets/css/carousel.css); this file only handles the arrow buttons.
+   (see assets/css/carousel.css); this file handles the arrow buttons and
+   places cards so each page reads left-to-right, row by row, in source order.
    ========================================================================== */
 (function () {
   "use strict";
@@ -49,10 +50,38 @@
       scrollByPage(1);
     });
 
-    // Keep the arrow states in sync with scroll position and layout changes.
-    track.addEventListener("scroll", updateButtons, { passive: true });
-    window.addEventListener("resize", updateButtons);
+    // CSS grid alone fills column by column (down-then-right), which scrambles
+    // the reading order within a page. Place each card explicitly so a page of
+    // 2 rows x N columns fills the top row first, then the bottom row — cards
+    // read in the same order they appear in the HTML (newest first).
+    var items = track.querySelectorAll(".media-item");
+    function layoutItems() {
+      if (!items.length) return;
+      for (var j = 0; j < items.length; j++) {
+        items[j].style.gridRow = "";
+        items[j].style.gridColumn = "";
+      }
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      var cols = Math.max(1, Math.round(
+        (track.clientWidth + gap) / (items[0].offsetWidth + gap)
+      ));
+      var perPage = cols * 2;
+      for (var i = 0; i < items.length; i++) {
+        var page = Math.floor(i / perPage);
+        var slot = i % perPage;
+        items[i].style.gridRow = String(Math.floor(slot / cols) + 1);
+        items[i].style.gridColumn = String(page * cols + (slot % cols) + 1);
+      }
+    }
 
+    // Keep the layout and arrow states in sync with scroll position and resizes.
+    track.addEventListener("scroll", updateButtons, { passive: true });
+    window.addEventListener("resize", function () {
+      layoutItems();
+      updateButtons();
+    });
+
+    layoutItems();
     updateButtons();
   }
 
